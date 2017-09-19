@@ -36,19 +36,12 @@ ret(cons < 0) = -Inf;
 dis = 1; tol = 1e-06; % tolerance for stopping 
 v_guess = zeros(1, num_k);
 while dis > tol
-    % generate a random number as the probability of changing state
-    X = rand;
+    % generate a random number as prob
     % compute the utility value for all possible combinations of k and k' with A_h or A_l:
     if A == A_h
         value_mat = ret + beta * (pi(1,1) * repmat(A_h * v_guess, [num_k 1]) + pi(1,2) * repmat(A_l * v_guess, [num_k 1]));
-        if X > pi(1,1)
-            A = A_l;
-        end
     else
         value_mat = ret + beta * (pi(2,1) * repmat(A_h * v_guess, [num_k 1]) + pi(2,2) * repmat(A_l * v_guess, [num_k 1]));
-        if X < pi(2,1)
-            A = A_h;
-        end
     end
     % find the optimal k' for every k:
     [vfn, pol_indx] = max(value_mat, [], 2);
