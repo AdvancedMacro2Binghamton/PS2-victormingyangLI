@@ -1,4 +1,5 @@
-# Problem Set 2
+ECON 634 
+Problem Set 2
 Mingyang Li
 
 I tried to solve the problems as much as I can. However, I was stuck on some 
@@ -16,4 +17,4 @@ output by adjusting the value of A.
 4) For part 5, using loops is easier to code than a different programming 
 language since Matlab has the advantage of dealing with matrices.
 
-
+Hopefully, I could obtain more concrete ideas after today's lecture.
