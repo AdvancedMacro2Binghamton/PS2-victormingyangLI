@@ -74,7 +74,7 @@ g = k(pol_indx); % policy function
 plot(k,vfn)
 figure
 plot(k,g)
-% How to plot policy function over K for each state of A?
+% How to plot policy function over K for each state of A? plot(k,g)?
 % figure
 % plot(A_vec,g)
 % How to plot savings over K for each state of A?
