@@ -35,24 +35,27 @@ ret(cons < 0) = -Inf;
 %%%% Iteration
 dis = 1; tol = 1e-06; % tolerance for stopping 
 v_guess = zeros(1, num_k);
+% A_vec = zeros(1, num_k); % create a matrix A_mat to keep track of A's
+% i = 1;
 while dis > tol
+    % assign the value of current A into A_mat
+    % A_vec(1, i) = A;
     % generate a random number as the probability of changing state
     X = rand;
     % compute the utility value for all possible combinations of k and k' with A_h or A_l:
     if A == A_h
         value_mat = ret + beta * (pi(1,1) * repmat(A_h * v_guess, [num_k 1]) + pi(1,2) * repmat(A_l * v_guess, [num_k 1]));
-        if X > pi(1,1)
+        if X > pi(1, 1)
             A = A_l;
         end
     else
         value_mat = ret + beta * (pi(2,1) * repmat(A_h * v_guess, [num_k 1]) + pi(2,2) * repmat(A_l * v_guess, [num_k 1]));
-        if X < pi(2,1)
+        if X < pi(2, 1)
             A = A_h;
         end
     end
     % find the optimal k' for every k:
     [vfn, pol_indx] = max(value_mat, [], 2);
-    vfn;
     vfn = vfn';
     
     % what is the distance between current guess and value function
@@ -61,6 +64,9 @@ while dis > tol
     % if distance is larger than tolerance, update current guess and
     % continue, otherwise exit the loop
     v_guess = vfn;
+    
+    % increase i to move to the next position of A_mat
+    % i = i + 1;
 end
 
 g = k(pol_indx); % policy function
@@ -68,5 +74,11 @@ g = k(pol_indx); % policy function
 plot(k,vfn)
 figure
 plot(k,g)
+% How to plot policy function over K for each state of A?
+% figure
+% plot(A_vec,g)
+% How to plot savings over K for each state of A?
+% figure
+% plot(A_vec,k)
 
 
